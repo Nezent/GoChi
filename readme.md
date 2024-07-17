@@ -33,24 +33,24 @@ Welcome to my project where I am currently learning and implementing Domain Driv
     go mod tidy
     ```
 
-3. Set up the database:
+<!-- 3. Set up the database:
     ```sh
     psql -U postgres -c "CREATE DATABASE ddd_hexagonal;"
-    ```
+    ``` -->
 
-4. Run the application:
+3. Run the application:
     ```sh
     make run
     ```
 
 ## ToDo
 
-- [ ] Set up initial project structure
-- [ ] Implement domain models
-- [ ] Create repository interfaces
-- [ ] Set up PostgreSQL database connection
-- [ ] Implement application services
-- [ ] Create REST API endpoints using Gin
+- [x] Set up initial project structure
+- [x] Implement domain models
+- [x] Create repository interfaces
+- [x] Set up PostgreSQL database connection
+- [x] Implement application services
+- [x] Create REST API endpoints using GoChi
 - [ ] Write unit and integration tests
 - [ ] Add documentation for each module
 - [ ] Deploy the application
