@@ -1,6 +1,7 @@
 package app
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Nezent/GoChi/domain"
@@ -13,5 +14,5 @@ func Start(){
 	ch := CustomerHandler{service: services.NewCustomerService(domain.NewCustomerRepositoryDB())}
 	router.Get("/customer", ch.GetCustomers)
 	router.Get("/customer/{id:[0-9]+}",ch.GetCustomerByID)
-	http.ListenAndServe(":3000", router)
+	log.Fatal(http.ListenAndServe(":3000", router))
 }

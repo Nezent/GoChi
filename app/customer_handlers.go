@@ -23,9 +23,12 @@ func (ch *CustomerHandler) GetCustomerByID(w http.ResponseWriter, r *http.Reques
 	id := chi.URLParam(r,"id")
 	customer,err := ch.service.GetCustomerByID(id)
 	if(err != nil) {
-		w.WriteHeader(http.StatusNotFound)
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(err.Code)
+		json.NewEncoder(w).Encode(err.AsMessage())
 	} else {
 		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(customer)
 	}
 }

@@ -1,5 +1,7 @@
 package domain
 
+import "github.com/Nezent/GoChi/errs"
+
 type Customer struct {
 	Id          string `json:"id"`
 	Name        string `json:"name"`
@@ -9,6 +11,6 @@ type Customer struct {
 }
 
 type CustomersRepository interface {
-	FindAll() ([]Customer, error)
-	FindCustomerByID(string) (*Customer, error)
+	FindAll() ([]Customer, *errs.AppError)
+	FindCustomerByID(string) (*Customer, *errs.AppError)
 }
