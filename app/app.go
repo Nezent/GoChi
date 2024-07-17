@@ -9,8 +9,9 @@ import (
 )
 
 func Start(){
-	r := chi.NewRouter()
-	ch := CustomerHandler{service: services.NewCustomerService(domain.NewCustomerRepositoryStub())}
-	r.Get("/", ch.GetCustomers)
-	http.ListenAndServe(":3000", r)
+	router := chi.NewRouter()
+	ch := CustomerHandler{service: services.NewCustomerService(domain.NewCustomerRepositoryDB())}
+	router.Get("/customer", ch.GetCustomers)
+	router.Get("/customer/{id:[0-9]+}",ch.GetCustomerByID)
+	http.ListenAndServe(":3000", router)
 }
