@@ -13,10 +13,18 @@ type CustomerHandler struct {
 }
 
 func (ch *CustomerHandler) GetCustomers(w http.ResponseWriter, r *http.Request) {
-	customers,_ := ch.service.GetAllCustomer()
+	var status = r.URL.Query().Get("status")
+	customers, err := ch.service.GetAllCustomer(status)
 
-	w.Header().Add("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(customers)
+	if(err != nil) {
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(err.Code)
+		json.NewEncoder(w).Encode(err.AsMessage())
+	} else {
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(customers)
+	}
 }
 
 func (ch *CustomerHandler) GetCustomerByID(w http.ResponseWriter, r *http.Request) {
